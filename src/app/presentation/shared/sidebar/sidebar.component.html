@@ -25,7 +25,7 @@
         D<span class="text-teal-600">.</span>
       </h1>
       <h1 class="hidden md:block font-bold text-sm md:text-xl text-center">
-        Dashwind<span class="text-teal-600">.</span>
+        MascoPlus<span class="text-teal-600">.</span>
       </h1>
       <div id="profile" class="space-y-3">
         <img
@@ -35,29 +35,25 @@
         />
         <div>
           <h2 class="font-medium text-xs md:text-sm text-center text-teal-500">
-            Eduard Pantazi
+            {{ user.name }}
           </h2>
-          <p class="text-xs text-gray-500 text-center">Administrator</p>
+          <p class="text-xs text-gray-500 text-center">
+            {{ user.role === "ADMIN" ? "Administrador" : "Trabajador" }}
+          </p>
         </div>
       </div>
 
       <div id="menu" class="flex flex-col space-y-2">
+        @for (item of itemRouter(); track item.path) {
         <a
-          href=""
-          class="text-sm font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
+          [routerLink]="item.path"
+          routerLinkActive="bg-teal-500 text-white text-base"
+          class="text-sm flex gap-x-1 items-center font-medium text-gray-700 py-2 px-2 hover:bg-teal-500 hover:text-white hover:text-base rounded-md transition duration-150 ease-in-out"
         >
-          <svg
-            class="w-6 h-6 fill-current inline-block"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-            ></path>
-          </svg>
-          <span class="">Dashboard</span>
+          <span [innerHTML]="item.data!['icon']"></span>
+          <span class="">{{ item.title }}</span>
         </a>
+        }
       </div>
     </div>
   </div>
